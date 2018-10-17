@@ -1,0 +1,103 @@
+CREATE TABLE users (
+	user_id INT PRIMARY KEY AUTO_INCREMENT,
+	username VARCHAR(255),
+	fname VARCHAR(255),
+	role VARCHAR(255)
+);
+
+
+CREATE TABLE admin (
+	user_admin_id INT NOT NULL,
+	FOREIGN KEY (user_admin_id) REFERENCES users (user_id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE customer (
+       user_customer_id INT NOT NULL,
+       FOREIGN KEY (User_customer_id) REFERENCES users (user_id) ON UPDATE CASCADE ON DELETE CASCADE	
+);
+
+
+INSERT INTO users (username,fname,role) VALUES("yasin","yasin sabir","admin"),
+("rida","rida anwar","admin"),
+("raza","raza tahseen","customer"),
+("ahsan","ahsan amin","customer"),
+("zain","zain raza","customer"),
+("ali","ali raza","customer"),
+("kamran","kamran nasir","customer"),
+("alishba","alishba ahmed","customer"),
+("noman","noman sabir","customer"),
+("muneeb","muneeb adil","admin");
+
+
+INSERT INTO admin (user_admin_id) VALUES(1),(2),(10);
+INSERT INTO customer (user_customer_id) VALUES(3),(4),(5),(6),(7),(8),(9);
+
+
+SELECT * FROM users;
+SELECT * FROM admin;
+SELECT * FROM customer;
+
+
+/*
+drop table users;
+drop table admin;
+drop table customer;
+*/
+
+
+SELECT admin.user_admin_id , users.username , users.fname , users.role FROM admin JOIN users ON admin.user_admin_id = users.user_id;
+
+SELECT customer.User_customer_id , users.username , users.fname , users.role FROM customer JOIN users ON customer.user_customer_id = users.user_id; 
+
+
+==============================================================================( 7-10-18 )
+
+CREATE DATABASE demo_fyp1
+
+CREATE TABLE users (
+user_id INT PRIMARY KEY AUTO_INCREMENT,
+username VARCHAR (255),
+user_password VARCHAR (255)
+);
+
+CREATE TABLE counselor (
+counselor_id INT AUTO_INCREMENT,
+fname VARCHAR(255),
+FOREIGN KEY ( counselor_id ) REFERENCES users (user_id) ON UPDATE CASCADE ON DELETE CASCADE 
+);
+
+
+CREATE TABLE event (
+event_id INT PRIMARY KEY AUTO_INCREMENT,
+event_name VARCHAR(255),
+counselor_id INT,
+FOREIGN KEY ( counselor_id ) REFERENCES counselor ( counselor_id ) ON UPDATE CASCADE ON DELETE CASCADE
+
+
+
+INSERT INTO users (username,user_password) VALUES("yasin","12345"),("rida","12345"),("raza","12345"),("ahsan","12345"),("zain","12345");
+INSERT INTO counselor (fname) VALUES("sabir"),("anwar"),("ahmed"),("amin"),("raza");
+
+
+SELECT users.user_id ,users.username , users.user_password ,counselor.counselor_id ,counselor.fname FROM users JOIN counselor 
+ON users.user_id = counselor.counselor_id;
+
+INSERT INTO event (event_name,counselor_id) VALUES ("workshop on android development",1),
+("workshop on React development",1),
+("workshop on Information Security",3),("workshop on CCNA",4);
+
+
+SELECT users.username,event.event_name FROM users JOIN event ON users.user_id = event.counselor_id ; 
+
+
+
+
+
+INSERT INTO users (username,user_password) VALUES("yasin","12345"),
+("rida","12345"),
+("raza","12345"),
+("ahsan","12345"),
+("zain","12345");
+
+
+
